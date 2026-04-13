@@ -272,7 +272,8 @@ export default function Dashboard() {
       const dataUrl = await domtoimage.toPng(cardRef.current, {
         quality: 1,
         bgcolor: '#F9F9F9',
-        scale: 2
+        width: cardRef.current.offsetWidth * 2,
+        height: cardRef.current.offsetHeight * 2
       });
       
       const link = document.createElement('a');
