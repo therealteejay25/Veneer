@@ -88,7 +88,7 @@ export default function AuthPage() {
           </div>
 
           {error && (
-            <div className="mb-4 p-3 rounded-xl bg-red-50 border border-red-100">
+            <div className="mb-4 p-3 rounded-full bg-red-50 border border-red-100">
               <p className="text-red-600 text-sm">{error}</p>
             </div>
           )}
@@ -96,7 +96,7 @@ export default function AuthPage() {
           <button
             onClick={handleGoogleAuth}
             disabled={loading}
-            className="w-full flex items-center justify-center gap-3 px-4 py-3 rounded-xl bg-black text-white hover:bg-black/90 transition-all font-medium mb-6 disabled:opacity-50"
+            className="w-full flex items-center cursor-pointer justify-center gap-3 px-4 py-3 rounded-full bg-black text-white hover:bg-black/90 transition-all font-medium mb-6 disabled:opacity-50"
           >
             <HugeiconsIcon icon={GoogleIcon} size={20} color="white" strokeWidth={1.8} />
             Continue with Google
@@ -122,7 +122,7 @@ export default function AuthPage() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
-                className="px-4 py-2.5 rounded-xl bg-black/3 border border-black/5 text-black placeholder:text-black/30 focus:outline-none focus:ring-2 focus:ring-black/10 focus:border-transparent transition-all"
+                className="px-4 py-2.5 rounded-full bg-black/3 border border-black/5 text-black placeholder:text-black/30 focus:outline-none focus:ring-2 focus:ring-black/10 focus:border-transparent transition-all"
                 placeholder="you@example.com"
               />
             </div>
@@ -137,7 +137,7 @@ export default function AuthPage() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
-                className="px-4 py-2.5 rounded-xl bg-black/3 border border-black/5 text-black placeholder:text-black/30 focus:outline-none focus:ring-2 focus:ring-black/10 focus:border-transparent transition-all"
+                className="px-4 py-2.5 rounded-full bg-black/3 border border-black/5 text-black placeholder:text-black/30 focus:outline-none focus:ring-2 focus:ring-black/10 focus:border-transparent transition-all"
                 placeholder="••••••••"
               />
             </div>
@@ -145,7 +145,7 @@ export default function AuthPage() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full px-4 py-2.5 rounded-xl bg-black/5 border border-black/10 text-black hover:bg-black/10 transition-all font-medium disabled:opacity-50 mt-2"
+              className="w-full px-4 py-2.5 cursor-pointer rounded-full bg-black/5 border border-black/10 text-black hover:bg-black/10 transition-all font-medium disabled:opacity-50 mt-2"
             >
               {loading ? "Loading..." : isSignUp ? "Sign Up" : "Sign In"}
             </button>
@@ -154,7 +154,7 @@ export default function AuthPage() {
           <div className="mt-6 text-center">
             <button
               onClick={() => setIsSignUp(!isSignUp)}
-              className="text-sm text-black/70 hover:text-black transition-colors"
+              className="text-sm text-black/70 cursor-pointer hover:text-black transition-colors"
             >
               {isSignUp
                 ? "Already have an account? Sign in"

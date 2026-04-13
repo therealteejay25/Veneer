@@ -272,9 +272,9 @@ export default function Dashboard() {
           onClose={() => setToast(null)}
         />
       )}
-      <div className="flex bg-[#F9F9F9] flex-1 min-h-screen">
-      <div className="w-1/2 bg-white flex items-center justify-center p-12 overflow-y-auto">
-        <div className="w-full max-w-md flex flex-col gap-6 py-8">
+      <div className="flex flex-col lg:flex-row bg-[#F9F9F9] h-screen overflow-hidden">
+      <div className="w-full lg:w-1/2 bg-white flex justify-center overflow-y-auto custom-scrollbar">
+        <div className="w-full max-w-xl flex flex-col gap-6 p-6 lg:p-12 py-8">
           <div className="flex items-center justify-between">
             <div className="flex flex-col gap-1">
               <h2 className="text-3xl font-bold">Edit Profile</h2>
@@ -282,7 +282,7 @@ export default function Dashboard() {
             </div>
             <button
               onClick={handleLogout}
-              className="p-2.5 rounded-xl bg-black/5 hover:bg-black/10 transition-all"
+              className="p-2.5 rounded-full bg-black/5 hover:bg-black/10 transition-all"
             >
               <HugeiconsIcon icon={Logout03Icon} size={20} color="currentColor" strokeWidth={1.8} />
             </button>
@@ -298,7 +298,7 @@ export default function Dashboard() {
                 type="text"
                 value={formData.name}
                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                className="px-4 py-2.5 rounded-xl bg-black/3 border border-black/5 text-black placeholder:text-black/30 focus:outline-none focus:ring-2 focus:ring-black/10 focus:border-transparent transition-all"
+                className="px-4 py-2.5 rounded-full bg-black/3 border border-black/5 text-black placeholder:text-black/30 focus:outline-none focus:ring-2 focus:ring-black/10 focus:border-transparent transition-all"
                 placeholder="Enter your name"
               />
             </div>
@@ -312,7 +312,7 @@ export default function Dashboard() {
                 type="text"
                 value={formData.role}
                 onChange={(e) => setFormData({ ...formData, role: e.target.value })}
-                className="px-4 py-2.5 rounded-xl bg-black/3 border border-black/5 text-black placeholder:text-black/30 focus:outline-none focus:ring-2 focus:ring-black/10 focus:border-transparent transition-all"
+                className="px-4 py-2.5 rounded-full bg-black/3 border border-black/5 text-black placeholder:text-black/30 focus:outline-none focus:ring-2 focus:ring-black/10 focus:border-transparent transition-all"
                 placeholder="Your role"
               />
             </div>
@@ -327,7 +327,7 @@ export default function Dashboard() {
                   type="text"
                   value={formData.location}
                   onChange={(e) => setFormData({ ...formData, location: e.target.value })}
-                  className="px-4 py-2.5 rounded-xl bg-black/3 border border-black/5 text-black placeholder:text-black/30 focus:outline-none focus:ring-2 focus:ring-black/10 focus:border-transparent transition-all"
+                  className="px-4 py-2.5 rounded-full bg-black/3 border border-black/5 text-black placeholder:text-black/30 focus:outline-none focus:ring-2 focus:ring-black/10 focus:border-transparent transition-all"
                   placeholder="City, Country"
                 />
               </div>
@@ -341,7 +341,7 @@ export default function Dashboard() {
                   type="text"
                   value={formData.phone}
                   onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                  className="px-4 py-2.5 rounded-xl bg-black/3 border border-black/5 text-black placeholder:text-black/30 focus:outline-none focus:ring-2 focus:ring-black/10 focus:border-transparent transition-all"
+                  className="px-4 py-2.5 rounded-full bg-black/3 border border-black/5 text-black placeholder:text-black/30 focus:outline-none focus:ring-2 focus:ring-black/10 focus:border-transparent transition-all"
                   placeholder="+234..."
                 />
               </div>
@@ -367,7 +367,7 @@ export default function Dashboard() {
               <div className="flex flex-col gap-1.5">
                 <label htmlFor="cover-upload" className="text-xs text-black/50">Cover Image</label>
                 {formData.coverImage && formData.coverImage !== "/image.png" ? (
-                  <div className="relative w-full h-32 rounded-xl overflow-hidden bg-black/3">
+                  <div className="relative w-full h-32 rounded-2xl overflow-hidden bg-black/3">
                     <Image
                       src={formData.coverImage}
                       alt="Cover preview"
@@ -387,7 +387,7 @@ export default function Dashboard() {
                 ) : (
                   <label
                     htmlFor="cover-upload"
-                    className="w-full h-32 rounded-xl bg-black/3 border-2 border-dashed border-black/10 hover:border-black/20 hover:bg-black/5 transition-all cursor-pointer flex flex-col items-center justify-center gap-2"
+                    className="w-full h-32 rounded-full bg-black/3 border-2 border-dashed border-black/10 hover:border-black/20 hover:bg-black/5 transition-all cursor-pointer flex flex-col items-center justify-center gap-2"
                   >
                     <HugeiconsIcon icon={Upload04Icon} size={24} color="currentColor" strokeWidth={1.8} />
                     <span className="text-sm text-black/50">{uploadingCover ? "Uploading..." : "Upload Cover Image"}</span>
@@ -453,7 +453,7 @@ export default function Dashboard() {
                   type="text"
                   value={formData.instagram}
                   onChange={(e) => setFormData({ ...formData, instagram: e.target.value })}
-                  className="px-3 py-2 rounded-lg bg-black/3 border border-black/5 text-black text-sm placeholder:text-black/30 focus:outline-none focus:ring-2 focus:ring-black/10 focus:border-transparent transition-all"
+                  className="px-3 py-2 rounded-full bg-black/3 border border-black/5 text-black text-sm placeholder:text-black/30 focus:outline-none focus:ring-2 focus:ring-black/10 focus:border-transparent transition-all"
                   placeholder="@username"
                 />
               </div>
@@ -465,7 +465,7 @@ export default function Dashboard() {
                   type="text"
                   value={formData.whatsapp}
                   onChange={(e) => setFormData({ ...formData, whatsapp: e.target.value })}
-                  className="px-3 py-2 rounded-lg bg-black/3 border border-black/5 text-black text-sm placeholder:text-black/30 focus:outline-none focus:ring-2 focus:ring-black/10 focus:border-transparent transition-all"
+                  className="px-3 py-2 rounded-full bg-black/3 border border-black/5 text-black text-sm placeholder:text-black/30 focus:outline-none focus:ring-2 focus:ring-black/10 focus:border-transparent transition-all"
                   placeholder="+234..."
                 />
               </div>
@@ -477,7 +477,7 @@ export default function Dashboard() {
                   type="text"
                   value={formData.twitter}
                   onChange={(e) => setFormData({ ...formData, twitter: e.target.value })}
-                  className="px-3 py-2 rounded-lg bg-black/3 border border-black/5 text-black text-sm placeholder:text-black/30 focus:outline-none focus:ring-2 focus:ring-black/10 focus:border-transparent transition-all"
+                  className="px-3 py-2 rounded-full bg-black/3 border border-black/5 text-black text-sm placeholder:text-black/30 focus:outline-none focus:ring-2 focus:ring-black/10 focus:border-transparent transition-all"
                   placeholder="@username"
                 />
               </div>
@@ -489,7 +489,7 @@ export default function Dashboard() {
                   type="text"
                   value={formData.linkedin}
                   onChange={(e) => setFormData({ ...formData, linkedin: e.target.value })}
-                  className="px-3 py-2 rounded-lg bg-black/3 border border-black/5 text-black text-sm placeholder:text-black/30 focus:outline-none focus:ring-2 focus:ring-black/10 focus:border-transparent transition-all"
+                  className="px-3 py-2 rounded-full bg-black/3 border border-black/5 text-black text-sm placeholder:text-black/30 focus:outline-none focus:ring-2 focus:ring-black/10 focus:border-transparent transition-all"
                   placeholder="username"
                 />
               </div>
@@ -498,7 +498,7 @@ export default function Dashboard() {
             <button
               onClick={handleSave}
               disabled={saving}
-              className="w-full px-4 py-2.5 rounded-xl bg-black text-white hover:bg-black/90 transition-all font-medium disabled:opacity-50 mt-2"
+              className="w-full mb-10 px-4 py-2.5 rounded-full bg-black text-white hover:bg-black/90 transition-all font-medium disabled:opacity-50 mt-2"
             >
               {saving ? "Saving..." : "Save Changes"}
             </button>
@@ -506,8 +506,8 @@ export default function Dashboard() {
         </div>
       </div>
 
-      <div className="w-1/2 flex justify-center items-center p-8">
-        <div className="pb-5 w-120 rounded-4xl p-2.5 shadow-2xl shadow-black/4 overflow-hidden bg-white">
+      <div className="w-full h-screen lg:w-1/2 flex justify-center p-6 lg:p-8 bg-[#F9F9F9] overflow-y-auto custom-scrollbar">
+        <div className="pb-5 w-full max-w-md lg:w-120 rounded-4xl p-2.5 shadow-2xl shadow-black/4 overflow-hidden bg-white self-start my-8">
           <div className="relative mb-10">
             {formData.coverImage && formData.coverImage !== "/image.png" ? (
               <Image
@@ -539,13 +539,13 @@ export default function Dashboard() {
           </div>
           <div className="flex flex-col px-3">
             <div className="flex flex-col gap-2">
-              <div className="flex justify-between">
+              <div className="flex flex-col sm:flex-row sm:justify-between gap-4">
                 <div className="flex flex-col">
-                  <h1 className="font-bold text-xl">{formData.name || "Your Name"}</h1>
-                  <p className="text-black/50 text-sm">@{profile?.username}</p>
-                  <p className="text-black/50 font-medium mt-auto">{formData.role || "Your Role"}</p>
+                  <h1 className="font-bold text-lg sm:text-xl">{formData.name || "Your Name"}</h1>
+                  <p className="text-black/50 text-xs sm:text-sm">@{profile?.username}</p>
+                  <p className="text-black/50 text-sm font-medium mt-2">{formData.role || "Your Role"}</p>
                 </div>
-                <div className="flex flex-col gap-2 items-end">
+                <div className="flex flex-row sm:flex-col gap-2 sm:items-end flex-wrap">
                   {formData.location && (
                     <div className="bg-black/3 w-fit flex gap-2 items-center text-sm font-medium pr-3 rounded-full p-1">
                       <div className="bg-black/3 p-1.75 rounded-full">

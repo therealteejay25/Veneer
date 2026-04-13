@@ -129,8 +129,8 @@ export default function ProfilePage({ params }: PageProps) {
           onClose={() => setToast(null)}
         />
       )}
-      <div className="flex min-h-screen items-center justify-center bg-[#F9F9F9] p-8">
-        <div className="pb-5 w-120 rounded-4xl p-2.5 shadow-2xl shadow-black/4 overflow-hidden bg-white">
+      <div className="flex min-h-screen items-center justify-center bg-[#F9F9F9] p-4 lg:p-8">
+        <div className="pb-5 w-full max-w-md lg:w-120 rounded-4xl p-2.5 shadow-2xl shadow-black/4 overflow-hidden bg-white">
           <div className="relative mb-10">
             {profile.cover_image ? (
               <Image
@@ -162,15 +162,15 @@ export default function ProfilePage({ params }: PageProps) {
           </div>
           <div className="flex flex-col px-3">
             <div className="flex flex-col gap-2">
-              <div className="flex justify-between">
+              <div className="flex flex-col sm:flex-row sm:justify-between gap-4">
                 <div className="flex flex-col">
-                  <h1 className="font-bold text-xl">{profile.name || "User"}</h1>
-                  <p className="text-black/50 text-sm">@{profile.username}</p>
+                  <h1 className="font-bold text-lg sm:text-xl">{profile.name || "User"}</h1>
+                  <p className="text-black/50 text-xs sm:text-sm">@{profile.username}</p>
                   {profile.role && (
-                    <p className="text-black/50 font-medium mt-auto">{profile.role}</p>
+                    <p className="text-black/50 font-medium mt-2 text-sm">{profile.role}</p>
                   )}
                 </div>
-                <div className="flex flex-col gap-2 items-end">
+                <div className="flex flex-row sm:flex-col gap-2 sm:items-end flex-wrap">
                   {profile.location && (
                     <div className="bg-black/3 w-fit flex gap-2 items-center text-sm font-medium pr-3 rounded-full p-1">
                       <div className="bg-black/3 p-1.75 rounded-full">
