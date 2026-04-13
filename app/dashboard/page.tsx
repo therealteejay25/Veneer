@@ -275,19 +275,19 @@ export default function Dashboard() {
           onClose={() => setToast(null)}
         />
       )}
-      <div className="flex flex-col lg:flex-row bg-[#F9F9F9] h-screen overflow-hidden">
-      <div className="w-full lg:w-1/2 bg-white flex justify-center overflow-y-auto custom-scrollbar">
-        <div className="w-full max-w-xl flex flex-col gap-6 p-6 lg:p-12 py-8">
+      <div className="flex flex-col lg:flex-row bg-[#F9F9F9] min-h-screen lg:h-screen overflow-x-hidden">
+      <div className="w-full lg:h-screen lg:w-1/2 bg-white flex justify-center overflow-y-auto custom-scrollbar">
+        <div className="w-full max-w-xl flex flex-col gap-6 p-4 md:p-6 lg:p-12 py-6 md:py-8">
           <div className="flex items-center justify-between">
             <div className="flex flex-col gap-1">
-              <h2 className="text-3xl font-bold">Edit Profile</h2>
-              <p className="text-black/50 text-sm">@{profile?.username}</p>
+              <h2 className="text-2xl md:text-3xl font-bold">Edit Profile</h2>
+              <p className="text-black/50 text-xs md:text-sm">@{profile?.username}</p>
             </div>
             <button
               onClick={handleLogout}
-              className="p-2.5 rounded-full bg-black/5 hover:bg-black/10 transition-all"
+              className="p-2 md:p-2.5 rounded-full bg-black/5 hover:bg-black/10 transition-all"
             >
-              <HugeiconsIcon icon={Logout03Icon} size={20} color="currentColor" strokeWidth={1.8} />
+              <HugeiconsIcon icon={Logout03Icon} size={18} color="currentColor" strokeWidth={1.8} className="md:w-5 md:h-5" />
             </button>
           </div>
 
@@ -501,7 +501,7 @@ export default function Dashboard() {
             <button
               onClick={handleSave}
               disabled={saving}
-              className="w-full mb-10 px-4 py-2.5 rounded-full bg-black text-white hover:bg-black/90 transition-all font-medium disabled:opacity-50 mt-2"
+              className="w-full mb-6 lg:mb-10 px-4 py-2.5 rounded-full bg-black text-white hover:bg-black/90 transition-all font-medium disabled:opacity-50 mt-2"
             >
               {saving ? "Saving..." : "Save Changes"}
             </button>
@@ -509,8 +509,8 @@ export default function Dashboard() {
         </div>
       </div>
 
-      <div className="w-full h-screen lg:w-1/2 flex justify-center p-6 lg:p-8 bg-[#F9F9F9] overflow-y-auto custom-scrollbar">
-        <div className="pb-5 w-full max-w-md lg:w-120 rounded-4xl p-2.5 shadow-2xl shadow-black/4 overflow-hidden bg-white self-start my-8">
+      <div className="w-full lg:h-screen lg:w-1/2 flex justify-center p-4 md:p-6 lg:p-8 bg-[#F9F9F9] overflow-y-auto lg:overflow-y-auto custom-scrollbar">
+        <div className="pb-5 w-full max-w-md lg:w-120 rounded-4xl p-2.5 shadow-2xl shadow-black/4 overflow-hidden bg-white self-start my-4 md:my-8">
           <div className="relative mb-10">
             {formData.coverImage && formData.coverImage !== "/image.png" ? (
               <Image
