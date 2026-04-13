@@ -16,6 +16,7 @@ import {
 import { notFound } from "next/navigation";
 import { useEffect, useState } from "react";
 import Toast from "@/components/Toast";
+import Head from "next/head";
 
 interface Profile {
   id: string;
@@ -61,6 +62,37 @@ export default function ProfilePage({ params }: PageProps) {
 
     setProfile(data);
     setLoading(false);
+    
+    // Update document title and meta tags dynamically
+    if (typeof window !== 'undefined' && data) {
+      document.title = `${data.name} (@${data.username}) - Veneer Bio Card`;
+      
+      // Update meta description
+      const metaDescription = document.querySelector('meta[name="description"]');
+      if (metaDescription) {
+        metaDescription.setAttribute('content', 
+          `${data.bio || `Connect with ${data.name}`} - View ${data.name}'s bio card on Veneer.`
+        );
+      }
+      
+      // Update OG tags
+      const ogTitle = document.querySelector('meta[property="og:title"]');
+      if (ogTitle) {
+        ogTitle.setAttribute('content', `${data.name} (@${data.username}) - Veneer Bio Card`);
+      }
+      
+      const ogDescription = document.querySelector('meta[property="og:description"]');
+      if (ogDescription) {
+        ogDescription.setAttribute('content', 
+          `${data.bio || `Connect with ${data.name}`} - View ${data.name}'s bio card on Veneer.`
+        );
+      }
+      
+      const ogImage = document.querySelector('meta[property="og:image"]');
+      if (ogImage && data.profile_image) {
+        ogImage.setAttribute('content', data.profile_image);
+      }
+    }
   };
 
   const copyToClipboard = (text: string, platform: 'instagram' | 'whatsapp' | 'twitter' | 'linkedin') => {
@@ -129,6 +161,36 @@ export default function ProfilePage({ params }: PageProps) {
           onClose={() => setToast(null)}
         />
       )}
+      
+      {/* JSON-LD Structured Data */}
+      {profile && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Person",
+              name: profile.name,
+              alternateName: `@${profile.username}`,
+              description: profile.bio,
+              jobTitle: profile.role,
+              address: profile.location ? {
+                "@type": "PostalAddress",
+                addressLocality: profile.location
+              } : undefined,
+              telephone: profile.phone,
+              image: profile.profile_image,
+              url: typeof window !== 'undefined' ? window.location.href : '',
+              sameAs: [
+                profile.instagram ? `https://instagram.com/${profile.instagram.replace('@', '')}` : '',
+                profile.twitter ? `https://x.com/${profile.twitter.replace('@', '')}` : '',
+                profile.linkedin ? `https://linkedin.com/in/${profile.linkedin}` : '',
+              ].filter(Boolean)
+            })
+          }}
+        />
+      )}
+      
       <div className="flex min-h-screen items-center justify-center bg-[#F9F9F9] p-4 lg:p-8">
         <div className="pb-5 w-full max-w-md lg:w-120 rounded-4xl p-2.5 shadow-2xl shadow-black/4 overflow-hidden bg-white">
           <div className="relative mb-10">
