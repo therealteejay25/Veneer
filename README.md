@@ -237,4 +237,4 @@ If you have any questions or run into issues, please open an issue on GitHub.
 
 ---
 
-Made with ❤️ by [Your Name]
+Made with ❤️ by Tayo.
