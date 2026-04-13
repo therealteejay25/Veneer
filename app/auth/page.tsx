@@ -24,17 +24,13 @@ export default function AuthPage() {
     setLoading(true);
     setError("");
 
-    const redirectUrl = process.env.NEXT_PUBLIC_SITE_URL 
-      ? `${process.env.NEXT_PUBLIC_SITE_URL}/auth/callback`
-      : `${typeof window !== 'undefined' ? window.location.origin : 'https://veneer01.vercel.app'}/auth/callback`;
-
     try {
       if (isSignUp) {
         const { error } = await supabase.auth.signUp({
           email,
           password,
           options: {
-            emailRedirectTo: redirectUrl,
+            emailRedirectTo: 'https://veneer01.vercel.app/auth/callback',
           },
         });
         if (error) throw error;
@@ -57,17 +53,19 @@ export default function AuthPage() {
   const handleGoogleAuth = async () => {
     setLoading(true);
     
-    const redirectUrl = process.env.NEXT_PUBLIC_SITE_URL 
-      ? `${process.env.NEXT_PUBLIC_SITE_URL}/auth/callback`
-      : `${typeof window !== 'undefined' ? window.location.origin : 'https://veneer01.vercel.app'}/auth/callback`;
-    
     try {
       const { error } = await supabase.auth.signInWithOAuth({
         provider: "google",
         options: {
-          redirectTo: redirectUrl,
+          redirectTo: 'https://veneer01.vercel.app/auth/callback',
         },
       });
+      if (error) throw error;
+    } catch (error: any) {
+      setError(error.message);
+      setLoading(false);
+    }
+  };
       if (error) throw error;
     } catch (error: any) {
       setError(error.message);
