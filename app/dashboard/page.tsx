@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
@@ -17,8 +17,10 @@ import {
   NewTwitterIcon,
   Linkedin02Icon,
   Upload04Icon,
+  Download01Icon,
 } from "@hugeicons/core-free-icons";
 import Toast from "@/components/Toast";
+import html2canvas from "html2canvas";
 
 export const dynamic = 'force-dynamic';
 
@@ -41,10 +43,12 @@ interface Profile {
 export default function Dashboard() {
   const router = useRouter();
   const supabase = createClient();
+  const cardRef = useRef<HTMLDivElement>(null);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [uploadingCover, setUploadingCover] = useState(false);
   const [uploadingProfile, setUploadingProfile] = useState(false);
+  const [exporting, setExporting] = useState(false);
   const [user, setUser] = useState<any>(null);
   const [profile, setProfile] = useState<Profile | null>(null);
   const [toast, setToast] = useState<{ message: string; type: "success" | "error" } | null>(null);
@@ -256,6 +260,33 @@ export default function Dashboard() {
     const link = `${window.location.origin}/${profile?.username}`;
     navigator.clipboard.writeText(link);
     setToast({ message: "Profile link copied!", type: "success" });
+  };
+
+  const exportCardAsPNG = async () => {
+    if (!cardRef.current) return;
+    
+    setExporting(true);
+    try {
+      const canvas = await html2canvas(cardRef.current, {
+        backgroundColor: '#F9F9F9',
+        scale: 2,
+        logging: false,
+        useCORS: true,
+        allowTaint: true,
+      });
+      
+      const link = document.createElement('a');
+      link.download = `${profile?.username || 'bio-card'}.png`;
+      link.href = canvas.toDataURL('image/png');
+      link.click();
+      
+      setToast({ message: "Card exported successfully!", type: "success" });
+    } catch (error) {
+      console.error('Export failed:', error);
+      setToast({ message: "Failed to export card", type: "error" });
+    } finally {
+      setExporting(false);
+    }
   };
 
   if (loading) {
@@ -510,7 +541,7 @@ export default function Dashboard() {
       </div>
 
       <div className="w-full lg:h-screen lg:w-1/2 flex justify-center p-4 md:p-6 lg:p-8 bg-[#F9F9F9] overflow-y-auto lg:overflow-y-auto custom-scrollbar">
-        <div className="pb-5 w-full max-w-md lg:w-120 rounded-4xl p-2.5 shadow-2xl shadow-black/4 overflow-hidden bg-white self-start my-4 md:my-8">
+        <div ref={cardRef} className="pb-5 w-full max-w-md lg:w-120 rounded-4xl p-2.5 shadow-2xl shadow-black/4 overflow-hidden bg-white self-start my-4 md:my-8">
           <div className="relative mb-10">
             {formData.coverImage && formData.coverImage !== "/image.png" ? (
               <Image
@@ -635,15 +666,27 @@ export default function Dashboard() {
                   </button>
                 </div>
               )}
-              <button
-                onClick={copyProfileLink}
-                className="bg-black items-center hover:scale-102 transition-all duration-300 p-2 cursor-pointer rounded-full w-full flex justify-center"
-              >
-                <p className="text-white flex items-center gap-2 font-medium">
-                  <HugeiconsIcon icon={Share08FreeIcons} size={17} color="white" strokeWidth={1.8} />
-                  Share Your Bio
-                </p>
-              </button>
+              <div className="flex gap-2">
+                <button
+                  onClick={exportCardAsPNG}
+                  disabled={exporting}
+                  className="bg-black/5 border border-black/10 flex-1 items-center hover:scale-102 transition-all duration-300 p-2 cursor-pointer rounded-full flex justify-center disabled:opacity-50"
+                >
+                  <p className="text-black flex items-center gap-2 font-medium text-sm">
+                    <HugeiconsIcon icon={Download01Icon} size={17} color="currentColor" strokeWidth={1.8} />
+                    {exporting ? 'Exporting...' : 'Export PNG'}
+                  </p>
+                </button>
+                <button
+                  onClick={copyProfileLink}
+                  className="bg-black flex-1 items-center hover:scale-102 transition-all duration-300 p-2 cursor-pointer rounded-full flex justify-center"
+                >
+                  <p className="text-white flex items-center gap-2 font-medium text-sm">
+                    <HugeiconsIcon icon={Share08FreeIcons} size={17} color="white" strokeWidth={1.8} />
+                    Share Bio
+                  </p>
+                </button>
+              </div>
             </div>
           </div>
         </div>
