@@ -669,7 +669,7 @@ export default function Dashboard() {
                 </div>
               )}
               <div className="flex gap-2">
-                <button
+                {/* <button
                   onClick={exportCardAsPNG}
                   disabled={exporting}
                   className="bg-black/5 border border-black/10 flex-1 items-center hover:scale-102 transition-all duration-300 p-2 cursor-pointer rounded-full flex justify-center disabled:opacity-50"
@@ -678,7 +678,7 @@ export default function Dashboard() {
                     <HugeiconsIcon icon={Download01Icon} size={17} color="currentColor" strokeWidth={1.8} />
                     {exporting ? 'Exporting...' : 'Export PNG'}
                   </p>
-                </button>
+                </button> */}
                 <button
                   onClick={copyProfileLink}
                   className="bg-black flex-1 items-center hover:scale-102 transition-all duration-300 p-2 cursor-pointer rounded-full flex justify-center"
