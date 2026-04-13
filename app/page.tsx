@@ -22,7 +22,7 @@ export default function Home() {
             name: "Veneer",
             applicationCategory: "BusinessApplication",
             description: "Create stunning, shareable bio cards in minutes. Showcase your social links, contact info, and professional presence with Veneer - the modern alternative to Linktree.",
-            url: typeof window !== 'undefined' ? window.location.origin : 'https://veneer.vercel.app',
+            url: typeof window !== 'undefined' ? window.location.origin : 'https://veneer01.vercel.app',
             offers: {
               "@type": "Offer",
               price: "0",
