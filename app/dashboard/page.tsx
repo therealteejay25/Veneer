@@ -271,14 +271,22 @@ export default function Dashboard() {
       
       const dataUrl = await domtoimage.toPng(cardRef.current, {
         quality: 1,
-        bgcolor: '#F9F9F9',
+        bgcolor: '#FFFFFF',
         width: cardRef.current.offsetWidth * 2,
         height: cardRef.current.offsetHeight * 2,
         style: {
           transform: 'scale(2)',
           transformOrigin: 'top left',
           width: cardRef.current.offsetWidth + 'px',
-          height: cardRef.current.offsetHeight + 'px'
+          height: cardRef.current.offsetHeight + 'px',
+          boxShadow: 'none',
+          border: 'none',
+          outline: 'none'
+        },
+        filter: (node: any) => {
+          // Filter out elements that might cause rendering issues
+          if (node.tagName === 'BUTTON') return false;
+          return true;
         }
       });
       
