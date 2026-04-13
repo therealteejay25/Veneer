@@ -267,13 +267,44 @@ export default function Dashboard() {
     
     setExporting(true);
     try {
-      const canvas = await html2canvas(cardRef.current, {
+      // Clone the element to avoid modifying the original
+      const clonedCard = cardRef.current.cloneNode(true) as HTMLElement;
+      
+      // Replace oklab colors with rgba equivalents
+      const replaceOklabColors = (element: HTMLElement) => {
+        const computedStyle = window.getComputedStyle(element);
+        const bgColor = computedStyle.backgroundColor;
+        const color = computedStyle.color;
+        
+        if (bgColor && bgColor.includes('oklab')) {
+          element.style.backgroundColor = 'rgba(0, 0, 0, 0.03)';
+        }
+        if (color && color.includes('oklab')) {
+          element.style.color = 'rgba(0, 0, 0, 0.75)';
+        }
+        
+        Array.from(element.children).forEach(child => {
+          replaceOklabColors(child as HTMLElement);
+        });
+      };
+      
+      replaceOklabColors(clonedCard);
+      
+      // Temporarily add to DOM for rendering
+      clonedCard.style.position = 'absolute';
+      clonedCard.style.left = '-9999px';
+      document.body.appendChild(clonedCard);
+      
+      const canvas = await html2canvas(clonedCard, {
         backgroundColor: '#F9F9F9',
         scale: 2,
         logging: false,
         useCORS: true,
         allowTaint: true,
       });
+      
+      // Remove cloned element
+      document.body.removeChild(clonedCard);
       
       const link = document.createElement('a');
       link.download = `${profile?.username || 'bio-card'}.png`;
