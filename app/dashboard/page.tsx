@@ -20,6 +20,7 @@ import {
   Download01Icon,
 } from "@hugeicons/core-free-icons";
 import Toast from "@/components/Toast";
+// @ts-ignore - no types available for dom-to-image-more
 import domtoimage from "dom-to-image-more";
 
 export const dynamic = 'force-dynamic';
