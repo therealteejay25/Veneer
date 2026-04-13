@@ -66,12 +66,6 @@ export default function AuthPage() {
       setLoading(false);
     }
   };
-      if (error) throw error;
-    } catch (error: any) {
-      setError(error.message);
-      setLoading(false);
-    }
-  };
 
   return (
     <>
