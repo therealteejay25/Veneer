@@ -42,13 +42,14 @@ export default function StaticBioCard({
   return (
     <div className="w-80 rounded-4xl p-2.5 shadow-2xl shadow-black/20 overflow-hidden bg-white">
       <div className="relative mb-10">
-        <Image
-          src={coverImage}
-          alt="Cover"
-          width={1000}
-          height={1000}
-          className="w-full h-auto rounded-3xl"
-        />
+        <div className="relative w-full aspect-[3/1] rounded-3xl overflow-hidden bg-black/3">
+          <Image
+            src={coverImage}
+            alt="Cover"
+            fill
+            className="object-cover"
+          />
+        </div>
         <Image
           src={profileImage}
           alt="Profile"

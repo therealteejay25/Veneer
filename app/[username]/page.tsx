@@ -218,15 +218,16 @@ export default function ProfilePage({ params }: PageProps) {
         <div className="pb-5 w-full max-w-md lg:w-120 rounded-4xl p-2.5 shadow-2xl shadow-black/4 overflow-hidden bg-white">
           <div className="relative mb-10">
             {profile.cover_image ? (
-              <Image
-                src={profile.cover_image}
-                alt="Cover"
-                width={1000}
-                height={1000}
-                className="w-full h-auto rounded-3xl"
-              />
+              <div className="relative w-full aspect-[3/1] rounded-3xl overflow-hidden bg-black/3">
+                <Image
+                  src={profile.cover_image}
+                  alt="Cover"
+                  fill
+                  className="object-cover"
+                />
+              </div>
             ) : (
-              <div className="w-full h-48 rounded-3xl bg-black/3 flex flex-col items-center justify-center gap-2">
+              <div className="w-full aspect-[3/1] rounded-3xl bg-black/3 flex flex-col items-center justify-center gap-2">
                 <HugeiconsIcon icon={Upload04Icon} size={32} color="currentColor" strokeWidth={1.5} className="text-black/20" />
                 <p className="text-black/30 text-sm">No cover image</p>
               </div>

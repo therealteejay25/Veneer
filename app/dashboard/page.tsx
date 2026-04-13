@@ -20,7 +20,7 @@ import {
   Download01Icon,
 } from "@hugeicons/core-free-icons";
 import Toast from "@/components/Toast";
-import html2canvas from "html2canvas";
+import domtoimage from "dom-to-image-more";
 
 export const dynamic = 'force-dynamic';
 
@@ -267,48 +267,22 @@ export default function Dashboard() {
     
     setExporting(true);
     try {
-      // Clone the element to avoid modifying the original
-      const clonedCard = cardRef.current.cloneNode(true) as HTMLElement;
-      
-      // Replace oklab colors with rgba equivalents
-      const replaceOklabColors = (element: HTMLElement) => {
-        const computedStyle = window.getComputedStyle(element);
-        const bgColor = computedStyle.backgroundColor;
-        const color = computedStyle.color;
-        
-        if (bgColor && bgColor.includes('oklab')) {
-          element.style.backgroundColor = 'rgba(0, 0, 0, 0.03)';
+      const dataUrl = await domtoimage.toPng(cardRef.current, {
+        quality: 1,
+        bgcolor: '#F9F9F9',
+        width: cardRef.current.offsetWidth * 2,
+        height: cardRef.current.offsetHeight * 2,
+        style: {
+          transform: 'scale(2)',
+          transformOrigin: 'top left',
+          width: cardRef.current.offsetWidth + 'px',
+          height: cardRef.current.offsetHeight + 'px'
         }
-        if (color && color.includes('oklab')) {
-          element.style.color = 'rgba(0, 0, 0, 0.75)';
-        }
-        
-        Array.from(element.children).forEach(child => {
-          replaceOklabColors(child as HTMLElement);
-        });
-      };
-      
-      replaceOklabColors(clonedCard);
-      
-      // Temporarily add to DOM for rendering
-      clonedCard.style.position = 'absolute';
-      clonedCard.style.left = '-9999px';
-      document.body.appendChild(clonedCard);
-      
-      const canvas = await html2canvas(clonedCard, {
-        backgroundColor: '#F9F9F9',
-        scale: 2,
-        logging: false,
-        useCORS: true,
-        allowTaint: true,
       });
-      
-      // Remove cloned element
-      document.body.removeChild(clonedCard);
       
       const link = document.createElement('a');
       link.download = `${profile?.username || 'bio-card'}.png`;
-      link.href = canvas.toDataURL('image/png');
+      link.href = dataUrl;
       link.click();
       
       setToast({ message: "Card exported successfully!", type: "success" });
@@ -575,15 +549,16 @@ export default function Dashboard() {
         <div ref={cardRef} className="pb-5 w-full max-w-md lg:w-120 rounded-4xl p-2.5 shadow-2xl shadow-black/4 overflow-hidden bg-white self-start my-4 md:my-8">
           <div className="relative mb-10">
             {formData.coverImage && formData.coverImage !== "/image.png" ? (
-              <Image
-                src={formData.coverImage}
-                alt="Cover"
-                width={1000}
-                height={1000}
-                className="w-full h-auto rounded-3xl"
-              />
+              <div className="relative w-full aspect-[3/1] rounded-3xl overflow-hidden bg-black/3">
+                <Image
+                  src={formData.coverImage}
+                  alt="Cover"
+                  fill
+                  className="object-cover"
+                />
+              </div>
             ) : (
-              <div className="w-full h-48 rounded-3xl bg-black/3 flex flex-col items-center justify-center gap-2">
+              <div className="w-full aspect-[3/1] rounded-3xl bg-black/3 flex flex-col items-center justify-center gap-2">
                 <HugeiconsIcon icon={Upload04Icon} size={32} color="currentColor" strokeWidth={1.5} className="text-black/20" />
                 <p className="text-black/30 text-sm">Upload cover image</p>
               </div>
