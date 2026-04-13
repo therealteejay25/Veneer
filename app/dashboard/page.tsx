@@ -20,8 +20,6 @@ import {
   Download01Icon,
 } from "@hugeicons/core-free-icons";
 import Toast from "@/components/Toast";
-// @ts-ignore - no types available for dom-to-image-more
-import domtoimage from "dom-to-image-more";
 
 export const dynamic = 'force-dynamic';
 
@@ -268,6 +266,9 @@ export default function Dashboard() {
     
     setExporting(true);
     try {
+      // Dynamic import to avoid SSR issues
+      const domtoimage = (await import('dom-to-image-more')).default;
+      
       const dataUrl = await domtoimage.toPng(cardRef.current, {
         quality: 1,
         bgcolor: '#F9F9F9',
