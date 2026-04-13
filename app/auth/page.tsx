@@ -7,6 +7,8 @@ import { HugeiconsIcon } from "@hugeicons/react";
 import { GoogleIcon, Mail01Icon } from "@hugeicons/core-free-icons";
 import Toast from "@/components/Toast";
 
+export const dynamic = 'force-dynamic';
+
 export default function AuthPage() {
   const [isSignUp, setIsSignUp] = useState(false);
   const [email, setEmail] = useState("");
@@ -28,7 +30,7 @@ export default function AuthPage() {
           email,
           password,
           options: {
-            emailRedirectTo: `${window.location.origin}/auth/callback`,
+            emailRedirectTo: `${typeof window !== 'undefined' ? window.location.origin : process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'}/auth/callback`,
           },
         });
         if (error) throw error;
@@ -54,7 +56,7 @@ export default function AuthPage() {
       const { error } = await supabase.auth.signInWithOAuth({
         provider: "google",
         options: {
-          redirectTo: `${window.location.origin}/auth/callback`,
+          redirectTo: `${typeof window !== 'undefined' ? window.location.origin : process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'}/auth/callback`,
         },
       });
       if (error) throw error;
@@ -73,9 +75,11 @@ export default function AuthPage() {
           onClose={() => setToast(null)}
         />
       )}
-      <div className="flex min-h-screen items-center justify-center bg-[#F9F9F9] p-4">
+      <div className="flex flex-col h-screen bg-[#F9F9F9] p-4">
+        <h1 className="text-2xl  text-black font-extrabold">Veneer.</h1>
+        <div className="w-full items-center h-full justify-center flex">
       <div className="w-full max-w-md">
-        <div className="bg-white rounded-3xl p-8 shadow-xl">
+        <div className="bg-white rounded-3xl p-8 shadow-xl shadow-black/4">
           <div className="flex flex-col gap-2 mb-8">
             <h1 className="text-3xl font-bold">
               {isSignUp ? "Create Account" : "Welcome Back"}
@@ -163,6 +167,7 @@ export default function AuthPage() {
           </div>
         </div>
       </div>
+        </div>
     </div>
     </>
   );

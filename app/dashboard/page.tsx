@@ -20,6 +20,8 @@ import {
 } from "@hugeicons/core-free-icons";
 import Toast from "@/components/Toast";
 
+export const dynamic = 'force-dynamic';
+
 interface Profile {
   id: string;
   username: string;
@@ -250,6 +252,7 @@ export default function Dashboard() {
   };
 
   const copyProfileLink = () => {
+    if (typeof window === 'undefined') return;
     const link = `${window.location.origin}/${profile?.username}`;
     navigator.clipboard.writeText(link);
     setToast({ message: "Profile link copied!", type: "success" });

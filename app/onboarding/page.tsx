@@ -5,6 +5,8 @@ import { createClient } from "@/lib/supabase/client";
 import { useRouter } from "next/navigation";
 import Toast from "@/components/Toast";
 
+export const dynamic = 'force-dynamic';
+
 export default function Onboarding() {
   const router = useRouter();
   const supabase = createClient();
@@ -143,7 +145,7 @@ export default function Onboarding() {
                 <p className="text-sm text-red-600">✗ Username is taken</p>
               )}
               <p className="text-xs text-black/50">
-                Your profile will be available at: {window.location.origin}/{username || "username"}
+                Your profile will be available at: {typeof window !== 'undefined' ? window.location.origin : 'yoursite.com'}/{username || "username"}
               </p>
             </div>
 

@@ -53,3 +53,52 @@ html {
   scrollbar-width: thin;
   scrollbar-color: rgba(0, 0, 0, 0.1) transparent;
 }
+
+/* Bio Card Animations */
+@keyframes float-1 {
+  0%, 100% {
+    transform: translateY(0px) rotate(-12deg);
+  }
+  50% {
+    transform: translateY(-20px) rotate(-12deg);
+  }
+}
+
+@keyframes float-2 {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-15px);
+  }
+}
+
+@keyframes float-3 {
+  0%, 100% {
+    transform: translateY(0px) rotate(12deg);
+  }
+  50% {
+    transform: translateY(-20px) rotate(12deg);
+  }
+}
+
+.card-float-1 {
+  animation: float-1 6s ease-in-out infinite;
+}
+
+.card-float-2 {
+  animation: float-2 5s ease-in-out infinite;
+}
+
+.card-float-3 {
+  animation: float-3 6s ease-in-out infinite;
+  animation-delay: 1s;
+}
+
+
+.bg-img {
+  background: url("/cta.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
