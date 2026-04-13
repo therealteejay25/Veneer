@@ -162,33 +162,56 @@ export default function ProfilePage({ params }: PageProps) {
         />
       )}
       
-      {/* JSON-LD Structured Data */}
+      {/* JSON-LD Structured Data for Rich Search Results */}
       {profile && (
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "Person",
-              name: profile.name,
-              alternateName: `@${profile.username}`,
-              description: profile.bio,
-              jobTitle: profile.role,
-              address: profile.location ? {
-                "@type": "PostalAddress",
-                addressLocality: profile.location
-              } : undefined,
-              telephone: profile.phone,
-              image: profile.profile_image,
-              url: typeof window !== 'undefined' ? window.location.href : '',
-              sameAs: [
-                profile.instagram ? `https://instagram.com/${profile.instagram.replace('@', '')}` : '',
-                profile.twitter ? `https://x.com/${profile.twitter.replace('@', '')}` : '',
-                profile.linkedin ? `https://linkedin.com/in/${profile.linkedin}` : '',
-              ].filter(Boolean)
-            })
-          }}
-        />
+        <>
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify({
+                "@context": "https://schema.org",
+                "@type": "Person",
+                name: profile.name,
+                alternateName: `@${profile.username}`,
+                description: profile.bio,
+                jobTitle: profile.role,
+                address: profile.location ? {
+                  "@type": "PostalAddress",
+                  addressLocality: profile.location
+                } : undefined,
+                telephone: profile.phone,
+                image: profile.profile_image || profile.cover_image,
+                url: typeof window !== 'undefined' ? window.location.href : '',
+                sameAs: [
+                  profile.instagram ? `https://instagram.com/${profile.instagram.replace('@', '')}` : '',
+                  profile.twitter ? `https://x.com/${profile.twitter.replace('@', '')}` : '',
+                  profile.linkedin ? `https://linkedin.com/in/${profile.linkedin}` : '',
+                ].filter(Boolean)
+              })
+            }}
+          />
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify({
+                "@context": "https://schema.org",
+                "@type": "ProfilePage",
+                mainEntity: {
+                  "@type": "Person",
+                  name: profile.name,
+                  identifier: profile.username,
+                  description: profile.bio,
+                  image: profile.profile_image || profile.cover_image,
+                  contactPoint: {
+                    "@type": "ContactPoint",
+                    telephone: profile.phone,
+                    contactType: "Personal"
+                  }
+                }
+              })
+            }}
+          />
+        </>
       )}
       
       <div className="flex min-h-screen items-center justify-center bg-[#F9F9F9] p-4 lg:p-8">

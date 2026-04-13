@@ -11,6 +11,59 @@ export default function Home() {
   const [isSupportModalOpen, setIsSupportModalOpen] = useState(false);
 
   return (
+    <>
+      {/* JSON-LD Structured Data for Landing Page */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "WebApplication",
+            name: "Veneer",
+            applicationCategory: "BusinessApplication",
+            description: "Create stunning, shareable bio cards in minutes. Showcase your social links, contact info, and professional presence with Veneer - the modern alternative to Linktree.",
+            url: typeof window !== 'undefined' ? window.location.origin : 'https://veneer.vercel.app',
+            offers: {
+              "@type": "Offer",
+              price: "0",
+              priceCurrency: "USD"
+            },
+            creator: {
+              "@type": "Person",
+              name: "Ariyo Eyitayo",
+              url: "https://x.com/_that_creative_"
+            },
+            featureList: [
+              "Create beautiful bio cards",
+              "Share social media links",
+              "Customize profile with images",
+              "Add contact information",
+              "Instagram, WhatsApp, Twitter, LinkedIn integration"
+            ]
+          })
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            name: "Veneer",
+            url: typeof window !== 'undefined' ? window.location.origin : 'https://veneer.vercel.app',
+            logo: typeof window !== 'undefined' ? `${window.location.origin}/image.png` : 'https://veneer.vercel.app/image.png',
+            sameAs: [
+              "https://x.com/_that_creative_"
+            ],
+            contactPoint: {
+              "@type": "ContactPoint",
+              contactType: "Customer Support",
+              availableLanguage: "English"
+            }
+          })
+        }}
+      />
+      
     <div className="flex flex-col w-full overflow-x-hidden items-center bg-[#F9F9F9] pt-5">
       <nav className="max-w-2xl z-60 flex items-center justify-between w-[90%] md:w-full border-5 border-black/5 mx-4 fixed md:mx-auto rounded-full pl-3 md:pl-4 bg-white shadow-xl shadow-black/5 p-1.5 md:p-2">
         <h1 className="text-lg md:text-xl font-extrabold">Veneer.</h1>
@@ -153,6 +206,6 @@ export default function Home() {
         isOpen={isSupportModalOpen} 
         onClose={() => setIsSupportModalOpen(false)} 
       />
-    </div>
+    </>
   );
 }
