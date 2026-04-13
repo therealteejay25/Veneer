@@ -206,6 +206,7 @@ export default function Home() {
         isOpen={isSupportModalOpen} 
         onClose={() => setIsSupportModalOpen(false)} 
       />
+    </div>
     </>
   );
 }

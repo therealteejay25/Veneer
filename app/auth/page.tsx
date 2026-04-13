@@ -24,13 +24,17 @@ export default function AuthPage() {
     setLoading(true);
     setError("");
 
+    const redirectUrl = process.env.NEXT_PUBLIC_SITE_URL 
+      ? `${process.env.NEXT_PUBLIC_SITE_URL}/auth/callback`
+      : `${typeof window !== 'undefined' ? window.location.origin : 'http://localhost:3000'}/auth/callback`;
+
     try {
       if (isSignUp) {
         const { error } = await supabase.auth.signUp({
           email,
           password,
           options: {
-            emailRedirectTo: `${typeof window !== 'undefined' ? window.location.origin : process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'}/auth/callback`,
+            emailRedirectTo: redirectUrl,
           },
         });
         if (error) throw error;
@@ -52,11 +56,16 @@ export default function AuthPage() {
 
   const handleGoogleAuth = async () => {
     setLoading(true);
+    
+    const redirectUrl = process.env.NEXT_PUBLIC_SITE_URL 
+      ? `${process.env.NEXT_PUBLIC_SITE_URL}/auth/callback`
+      : `${typeof window !== 'undefined' ? window.location.origin : 'http://localhost:3000'}/auth/callback`;
+    
     try {
       const { error } = await supabase.auth.signInWithOAuth({
         provider: "google",
         options: {
-          redirectTo: `${typeof window !== 'undefined' ? window.location.origin : process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'}/auth/callback`,
+          redirectTo: redirectUrl,
         },
       });
       if (error) throw error;
