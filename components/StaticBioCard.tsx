@@ -50,13 +50,14 @@ export default function StaticBioCard({
             className="object-cover"
           />
         </div>
-        <Image
-          src={profileImage}
-          alt="Profile"
-          width={1000}
-          height={1000}
-          className="w-20 border-4 border-white absolute left-3 -bottom-8 h-auto rounded-full"
-        />
+        <div className="w-20 h-20 border-4 border-white absolute left-3 -bottom-8 rounded-full overflow-hidden bg-black/3">
+          <Image
+            src={profileImage}
+            alt="Profile"
+            fill
+            className="object-cover"
+          />
+        </div>
       </div>
       <div className="flex flex-col px-3 pb-3">
         <div className="flex flex-col gap-2">

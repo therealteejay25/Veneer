@@ -94,10 +94,7 @@ export default function Home() {
             Create Your Beautiful Bio Card and Share it With The World.
           </h1>
           <p className="text-black/50 mt-1 max-w-2xl px-4 md:px-8 text-center text-sm md:text-[15px]">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid,
-            odit velit! Eius quaerat, at aliquid suscipit odit molestiae laborum
-            quasi magni nesciunt! Excepturi, incidunt dolore ullam expedita
-            rerum possimus commodi?
+            Create a stunning digital business card in minutes. Share your social links, contact info, and professional presence with a beautiful, customizable bio card that stands out.
           </p>
           <div className="flex gap-4 justify-center">
             <Link
@@ -173,10 +170,7 @@ export default function Home() {
               Like What You See?
             </h1>
             <p className="text-white max-w-xl text-xs md:text-sm mx-auto text-center px-4">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste a
-              est fugiat, ducimus numquam minus ex temporibus quisquam!
-              Dignissimos obcaecati error suscipit officiis nobis doloribus
-              assumenda enim sapiente consequuntur voluptatibus.
+              Join thousands of creators, professionals, and businesses using Veneer to share their story. Create your free bio card today and make every connection count.
             </p>
             <button 
               onClick={() => setIsSupportModalOpen(true)}

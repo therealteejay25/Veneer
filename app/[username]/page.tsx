@@ -233,13 +233,14 @@ export default function ProfilePage({ params }: PageProps) {
               </div>
             )}
             {profile.profile_image ? (
-              <Image
-                src={profile.profile_image}
-                alt="Profile"
-                width={1000}
-                height={1000}
-                className="w-24 border-6 border-white absolute left-3 -bottom-10 h-auto rounded-full"
-              />
+              <div className="w-24 h-24 border-6 border-white absolute left-3 -bottom-10 rounded-full overflow-hidden bg-black/3">
+                <Image
+                  src={profile.profile_image}
+                  alt="Profile"
+                  fill
+                  className="object-cover"
+                />
+              </div>
             ) : (
               <div className="w-24 h-24 border-6 border-white absolute left-3 -bottom-10 rounded-full bg-black/3 flex flex-col items-center justify-center">
                 <HugeiconsIcon icon={Upload04Icon} size={20} color="currentColor" strokeWidth={1.5} className="text-black/20" />
